@@ -27,7 +27,7 @@ def get_gpt_response(system_prompt, user_prompt, prev_msgs=[], temperature=0.5, 
         response_format={"type": "json_object"} if is_json else None,
     )
 
-    return response.choices[0].message
+    return response.choices[0].message.content
 
 
 def get_dall_e_response(prompt, size=256, model="dall-e-3", n_images=1):
