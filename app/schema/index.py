@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import List
 
 from app.schema.base import BaseModel, PydanticBaseModel
 
@@ -32,3 +33,13 @@ class User(BaseModel):
     email: str
     hashed_password: str
     is_deleted: bool = False
+
+
+class IngredientList(BaseModel):
+    ingredients: List[str]
+
+
+class RecipeListLLMResponse(PydanticBaseModel):
+    title: str
+    recipes: List[str]
+    instructions: List[str]
