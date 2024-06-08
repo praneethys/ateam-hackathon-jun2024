@@ -8,6 +8,7 @@ from fastapi.responses import RedirectResponse
 
 from app.api.routers.user import user_router
 from app.api.routers.ingredient import ingredient_router
+from app.api.routers.recipe import recipe_router
 from app.settings import init_settings
 from fastapi.staticfiles import StaticFiles
 
@@ -50,6 +51,7 @@ def init_app(init_db: bool = True) -> FastAPI:
         app.mount("/api/data", StaticFiles(directory="data"), name="static")
     app.include_router(user_router)
     app.include_router(ingredient_router)
+    app.include_router(recipe_router)
 
     return app
 

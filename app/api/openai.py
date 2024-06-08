@@ -1,7 +1,7 @@
 from openai import OpenAI
+import os
 
-
-client = OpenAI(api_key="")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 def get_gpt_response(system_prompt, user_prompt, prev_msgs=[], temperature=0.5, model="gpt-4o", is_json=False):
@@ -21,7 +21,7 @@ def get_gpt_response(system_prompt, user_prompt, prev_msgs=[], temperature=0.5, 
         model=model,
         messages=messages,
         temperature=temperature,
-        max_tokens=250,
+        max_tokens=1024,
         top_p=0.3,
         frequency_penalty=0.0,
         response_format={"type": "json_object"} if is_json else None,

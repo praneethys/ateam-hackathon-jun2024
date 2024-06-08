@@ -37,3 +37,9 @@ class User(BaseModel):
 
 class IngredientList(BaseModel):
     ingredients: List[str]
+
+
+class RecipeListLLMResponse(PydanticBaseModel):
+    title: str
+    recipes: List[str]
+    instructions: List[str]
