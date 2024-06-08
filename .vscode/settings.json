@@ -1,0 +1,11 @@
+{
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+    },
+    "ms-python.black-formatter.args": [
+        "--line-length",
+        "119"
+    ]
+}

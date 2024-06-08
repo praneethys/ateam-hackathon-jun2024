@@ -1,0 +1,23 @@
+# Pull the official PostgreSQL 16 image
+FROM postgres:16
+
+# Create a directory for the database files
+RUN mkdir -p /var/lib/postgresql/data
+
+# Change the ownership of the data directory
+RUN chown -R postgres:postgres /var/lib/postgresql/data
+
+# Copy the configuration files into the data directory
+# NOTE: the [f] suffix is to ensure that the COPY command will not fail if the files don't exist
+COPY ./pg_hba.con[f] /var/lib/postgresql/data/pg_hba.conf
+COPY ./postgresql.con[f] /var/lib/postgresql/data/postgresql.conf
+
+# Include environment variables for the PostgreSQL user and password
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+# Expose the default PostgreSQL port
+EXPOSE 5432
+
+# Start the PostgreSQL server
+CMD ["postgres", "-c", "config_file=/var/lib/postgresql/data/postgresql.conf"]
