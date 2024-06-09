@@ -3,6 +3,7 @@ import os
 from typing import List
 import uuid
 from llama_index.core import PromptTemplate
+from fastapi import HTTPException
 
 from app.api.openai import get_dall_e_response, get_gpt_response
 from app.schema.index import RecipeListLLMResponse
@@ -65,3 +66,44 @@ def generate_recipes(ingredients: List[str]):
         json.dump(recipes_list, f, indent=4)
 
     return recipes_list
+
+
+def generate_ingredients_facts(ingredients: List[str]):
+    data_dir = os.path.abspath("./data")
+    ingredients_output_path = os.path.join(data_dir, "ingredient-facts.txt")
+    ingredients_list = ", ".join(ingredients)
+
+    system_context_str = """
+        You are a helpful nutritionist that can generate nutrition facts based on ingredients.
+        The nutrition facts should be accurate and informative and a single paragraph.
+    """.strip()
+
+    user_context_str = f"""
+        Using the following ingredients, generate the nutrition facts. Write a single paragraph.
+
+        Ingredients: {ingredients_list}
+    """.strip()
+
+    try:
+        facts = get_gpt_response(system_prompt=system_context_str, user_prompt=user_context_str, is_json=True)
+
+        with open(ingredients_output_path, "w") as f:
+            f.write(facts)
+    except Exception as e:
+        print("Exception while generating ingredients facts: ", str(e))
+        raise e
+
+    return facts
+
+
+def get_ingredient_facts():
+    data_dir = os.path.abspath("./data")
+    ingredients_output_path = os.path.join(data_dir, "ingredient-facts.txt")
+
+    if not os.path.exists(ingredients_output_path):
+        return HTTPException(status_code=404, detail="Ingredients facts not found")
+
+    with open(ingredients_output_path, "r") as f:
+        facts = f.read()
+
+    return facts
