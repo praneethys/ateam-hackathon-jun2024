@@ -44,7 +44,8 @@ def get_tts_response(text, output_file_path="output.mp3", model="tts-1", voice="
     return response.write_to_file(output_file_path)
 
 
-def get_stt_response(audio_bytes, model="whisper-1"):
-    response = client.audio.transcriptions.create(model=model, file=audio_bytes)
+def get_stt_response(audio_file_path, model="whisper-1"):
+    audio_file = open(audio_file_path, "rb")
+    response = client.audio.transcriptions.create(model=model, file=audio_file)
 
     return response.text
