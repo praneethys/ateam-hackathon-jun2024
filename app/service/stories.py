@@ -79,14 +79,14 @@ async def generate_story(recipe: RecipeListLLMResponse) -> StoryLLMResponse:
     return story_response
 
 
-async def respond_to_user(audio_file_bytes):
-    transcription = get_stt_response(audio_file_bytes)
-    # TODO: LLM stuff
-    response = "placeholder"
+async def respond_to_user(interaction_audio_file):
+    transcription = get_stt_response(interaction_audio_file)
+
+    reply = get_gpt_response(system_prompt="answer to user message", user_prompt=transcription)
     data_dir = os.path.abspath("./data/story")
-    response_audio_file = os.path.join(data_dir, f"response.mp3")
+    response_audio_file = os.path.join(data_dir, f"{uuid.uuid4()}.mp3")
 
     # Generate the audio file for the story if it doesn't exist
-    get_tts_response(response, output_file_path=response_audio_file)
+    get_tts_response(reply, output_file_path=response_audio_file)
 
     return response_audio_file
