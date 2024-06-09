@@ -80,3 +80,28 @@ def get_recipes():
     with open(recipe_list_path, "r") as f:
         recipes = json.load(f)
         return recipes
+
+
+@r.get(
+    "/{recipe_uuid}",
+    responses={
+        200: {"description": "Recipe found"},
+        404: {"description": "Recipe not found"},
+        500: {"description": "Internal server error"},
+    },
+)
+def get_recipe(recipe_uuid: str):
+    data = os.path.abspath("./data")
+    recipe_list_path = os.path.join(data, "recipe_output.json")
+
+    if not os.path.exists(recipe_list_path):
+        return HTTPException(status_code=404, detail="Recipe not found")
+
+    with open(recipe_list_path, "r") as f:
+        recipes = json.load(f)
+
+    for recipe in recipes:
+        if recipe["recipe_uuid"] == recipe_uuid:
+            return recipe
+
+    return HTTPException(status_code=404, detail="Recipe not found")
