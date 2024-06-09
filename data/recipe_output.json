@@ -1,0 +1,69 @@
+[
+    {
+        "title": "Apple Banana Smoothie",
+        "ingredients": [
+            "1 apple, peeled and chopped",
+            "1 banana, peeled and sliced",
+            "1 cup non-dairy milk (e.g., almond milk, oat milk)",
+            "1 tablespoon honey (optional)"
+        ],
+        "instructions": [
+            "Place the chopped apple and sliced banana into a blender.",
+            "Add the non-dairy milk.",
+            "Blend until smooth.",
+            "Taste and add honey if desired for extra sweetness.",
+            "Pour into glasses and serve immediately."
+        ],
+        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-KKptCKbHm2GMgKGfOikqiYZz/codepath-group-project/img-etbI2TtuCvyvLENZZ9KWEnBx.png?st=2024-06-09T00%3A04%3A44Z&se=2024-06-09T02%3A04%3A44Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-08T17%3A24%3A47Z&ske=2024-06-09T17%3A24%3A47Z&sks=b&skv=2023-11-03&sig=UNSwbM9u1c6TfClviLqsr5x1oMHWu0XJ5x6e/akkS24%3D",
+        "uuid": "371bd5dd-e812-47b0-8334-2f4ef437755c"
+    },
+    {
+        "title": "Apple Banana Oatmeal",
+        "ingredients": [
+            "1 apple, peeled and chopped",
+            "1 banana, peeled and sliced",
+            "1 cup rolled oats",
+            "2 cups water or non-dairy milk",
+            "1 teaspoon cinnamon",
+            "1 tablespoon maple syrup (optional)"
+        ],
+        "instructions": [
+            "In a medium saucepan, bring the water or non-dairy milk to a boil.",
+            "Add the rolled oats and reduce the heat to a simmer.",
+            "Cook for about 5 minutes, stirring occasionally.",
+            "Add the chopped apple, sliced banana, and cinnamon.",
+            "Continue to cook for another 5 minutes, or until the oats are tender and the fruit is soft.",
+            "Stir in the maple syrup if desired.",
+            "Serve warm."
+        ],
+        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-KKptCKbHm2GMgKGfOikqiYZz/codepath-group-project/img-xZ0TyjsAykg0xruFsv6w8kc6.png?st=2024-06-09T00%3A04%3A55Z&se=2024-06-09T02%3A04%3A55Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-08T21%3A17%3A11Z&ske=2024-06-09T21%3A17%3A11Z&sks=b&skv=2023-11-03&sig=EJITLCKh80XU/E3yzpxL6iYR/o%2BHAYdxEwmSXY2kUvg%3D",
+        "uuid": "d4197592-691f-47ee-8877-38fc12aafba2"
+    },
+    {
+        "title": "Apple Banana Pancakes",
+        "ingredients": [
+            "1 apple, peeled and grated",
+            "1 banana, mashed",
+            "1 cup flour",
+            "1 tablespoon sugar",
+            "1 teaspoon baking powder",
+            "1/2 teaspoon baking soda",
+            "1/4 teaspoon salt",
+            "1 cup non-dairy milk",
+            "1 tablespoon vegetable oil",
+            "1 teaspoon vanilla extract"
+        ],
+        "instructions": [
+            "In a large bowl, mix the flour, sugar, baking powder, baking soda, and salt.",
+            "In another bowl, combine the non-dairy milk, vegetable oil, and vanilla extract.",
+            "Add the wet ingredients to the dry ingredients and stir until just combined.",
+            "Fold in the grated apple and mashed banana.",
+            "Heat a non-stick skillet over medium heat and lightly grease it with oil or non-dairy butter.",
+            "Pour 1/4 cup of batter onto the skillet for each pancake.",
+            "Cook until bubbles form on the surface, then flip and cook until golden brown on the other side.",
+            "Serve warm with your favorite toppings."
+        ],
+        "image_url": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-KKptCKbHm2GMgKGfOikqiYZz/codepath-group-project/img-m6wfqOs1TaMi0PDpJBPGclV3.png?st=2024-06-09T00%3A05%3A09Z&se=2024-06-09T02%3A05%3A09Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-08T12%3A26%3A08Z&ske=2024-06-09T12%3A26%3A08Z&sks=b&skv=2023-11-03&sig=JhDexyajGs792Bbn3PGlQAoAhAIIknl2s1jVBaITbL8%3D",
+        "uuid": "10c82eae-a733-409e-bbb9-c530a1c96ae6"
+    }
+]
