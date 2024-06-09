@@ -1,3 +1,4 @@
+from typing import List
 from openai import OpenAI
 import os
 
@@ -30,12 +31,14 @@ def get_gpt_response(system_prompt, user_prompt, prev_msgs=[], temperature=0.5, 
     return response.choices[0].message.content
 
 
-def get_dall_e_response(prompt, size=256, model="dall-e-3", n_images=1):
+def get_dall_e_response(prompt: str, size=256, model="dall-e-3", n_images=1) -> List[str]:
     response = client.images.generate(
         model=model, prompt=prompt, size=f"{size}x{size}", quality="standard", n=n_images, response_format="b64_json"
     )
 
-    return f"data:image/jpeg;base64,{response.data[0].b64_json}"
+    urls = [f"data:image/jpeg;base64,{data.b64_json}" for data in response.data]
+
+    return urls
 
 
 def get_tts_response(text, output_file_path="output.mp3", model="tts-1", voice="nova"):

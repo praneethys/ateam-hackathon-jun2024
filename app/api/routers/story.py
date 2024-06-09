@@ -52,8 +52,8 @@ async def post_story(recipe_id: str):
     },
 )
 def get_story_audio(recipe_id: str):
-    data_dir = os.path.abspath("./data/story")
-    story_audio_path = os.path.join(data_dir, f"{recipe_id}.mp3")
+    data_dir = os.path.abspath(f"./data/story/recipe_{recipe_id}")
+    story_audio_path = os.path.join(data_dir, f"story_audio.mp3")
     if not os.path.exists(story_audio_path):
         return HTTPException(status_code=404, detail="Story audio not found")
 
@@ -69,12 +69,33 @@ def get_story_audio(recipe_id: str):
     },
 )
 def get_story(recipe_id: str):
-    data_dir = os.path.abspath("./data/story")
+    data_dir = os.path.abspath(f"./data/story/recipe_{recipe_id}")
+    file_path = os.path.join(data_dir, f"story.json")
 
-    if not os.path.exists(os.path.join(data_dir, f"{recipe_id}.json")):
+    if not os.path.exists(file_path):
         return HTTPException(status_code=404, detail="Story not found")
 
-    with open(os.path.join(data_dir, f"{recipe_id}.json"), "r") as f:
+    with open(file_path) as f:
+        story = json.load(f)
+        return story
+
+
+@r.get(
+    "/image/{recipe_id}",
+    responses={
+        200: {"description": "Recipe found"},
+        404: {"description": "Recipe not found"},
+        500: {"description": "Internal server error"},
+    },
+)
+def get_story(recipe_id: str):
+    data_dir = os.path.abspath(f"./data/story/recipe_{recipe_id}")
+    file_path = os.path.join(data_dir, f"story_image.json")
+
+    if not os.path.exists(file_path):
+        return HTTPException(status_code=404, detail="Story not found")
+
+    with open(file_path, "r") as f:
         story = json.load(f)
         return story
 
