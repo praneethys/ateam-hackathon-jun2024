@@ -2,7 +2,7 @@ import json
 import os
 from typing import Dict
 import uuid
-from app.api.openai import get_gpt_response, get_tts_response
+from app.api.openai import get_gpt_response, get_tts_response, get_stt_response
 from app.schema.index import RecipeListLLMResponse, StoryLLMResponse
 
 
@@ -77,3 +77,16 @@ async def generate_story(recipe: RecipeListLLMResponse) -> StoryLLMResponse:
     await generate_story_audio(story_response)
 
     return story_response
+
+
+async def respond_to_user(audio_file_bytes):
+    transcription = get_stt_response(audio_file_bytes)
+    # TODO: LLM stuff
+    response = "placeholder"
+    data_dir = os.path.abspath("./data/story")
+    response_audio_file = os.path.join(data_dir, f"response.mp3")
+
+    # Generate the audio file for the story if it doesn't exist
+    get_tts_response(response, output_file_path=response_audio_file)
+
+    return response_audio_file
