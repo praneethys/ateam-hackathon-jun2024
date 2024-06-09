@@ -47,7 +47,7 @@ class RecipeListLLMResponse(PydanticBaseModel):
 
 class Recipe(RecipeListLLMResponse):
     recipe_uuid: str
-    image_url: str
+    image_url: List[str]
 
 
 class StoryLLMResponse(PydanticBaseModel):
