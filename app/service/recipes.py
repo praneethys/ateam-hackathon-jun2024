@@ -58,7 +58,7 @@ def generate_recipes(ingredients: List[str]):
             size=1024,
         )
         recipe["image_url"] = dalle_response_img_url
-        recipe["uuid"] = str(uuid.uuid4())
+        recipe["recipe_uuid"] = str(uuid.uuid4())
 
     # Write recipe_list to data/recipe_output.json
     with open(recipe_output_path, "w") as f:

@@ -41,5 +41,17 @@ class IngredientList(BaseModel):
 
 class RecipeListLLMResponse(PydanticBaseModel):
     title: str
-    recipes: List[str]
+    ingredients: List[str]
     instructions: List[str]
+
+
+class Recipe(RecipeListLLMResponse):
+    recipe_uuid: str
+    image_url: str
+
+
+class StoryLLMResponse(PydanticBaseModel):
+    title: str
+    story: str
+    recipe_uuid: str
+    story_uuid: str

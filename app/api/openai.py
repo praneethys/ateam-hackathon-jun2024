@@ -38,10 +38,10 @@ def get_dall_e_response(prompt, size=256, model="dall-e-3", n_images=1):
     return response.data[0].url
 
 
-def get_tts_response(text, model="tts-1", voice="alloy"):
+def get_tts_response(text, output_file_path="output.mp3", model="tts-1", voice="nova"):
     response = client.audio.speech.create(model=model, voice=voice, input=text)
 
-    return response["data"]
+    return response.write_to_file(output_file_path)
 
 
 def get_stt_response(audio_bytes, model="whisper-1"):
