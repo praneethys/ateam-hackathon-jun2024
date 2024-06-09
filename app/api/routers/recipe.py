@@ -6,7 +6,6 @@ from app.service.recipes import generate_recipes
 
 recipe_router = r = APIRouter(prefix="/api/v1/recipes", tags=["recipes"])
 
-
 @r.post(
     "/",
     responses={

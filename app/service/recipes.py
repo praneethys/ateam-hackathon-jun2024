@@ -1,5 +1,7 @@
 import json
+import os
 from typing import List
+import uuid
 from llama_index.core import PromptTemplate
 
 from app.api.openai import get_dall_e_response, get_gpt_response
@@ -19,7 +21,7 @@ def generate_recipe_text(ingredients: List[str]):
     """.strip()
 
     user_context_str = f"""
-        Using the following ingredients, generate a list of 5 recipes. Return the list in JSON format.
+        Using the following ingredients, generate a list of 3 recipes. Return the list in JSON format.
         {RecipeListLLMResponse.model_json_schema()}
 
         Ingredients: {ingredients_list}
@@ -36,6 +38,14 @@ def generate_recipe_text(ingredients: List[str]):
 
 
 def generate_recipes(ingredients: List[str]):
+    # Check if data/recipe_output.json exists and return cached data
+    data_dir = os.path.abspath("./data")
+    recipe_output_path = os.path.join(data_dir, "recipe_output.json")
+    if os.path.exists(recipe_output_path):
+        with open(recipe_output_path, "r") as f:
+            recipes_list = json.load(f)
+        return recipes_list
+
     # 1. Generate recipe text
     recipes_llm_response = generate_recipe_text(ingredients)
     print(recipes_llm_response)
@@ -48,5 +58,10 @@ def generate_recipes(ingredients: List[str]):
             size=1024,
         )
         recipe["image_url"] = dalle_response_img_url
+        recipe["uuid"] = str(uuid.uuid4())
+
+    # Write recipe_list to data/recipe_output.json
+    with open(recipe_output_path, "w") as f:
+        json.dump(recipes_list, f, indent=4)
 
     return recipes_list
