@@ -53,11 +53,13 @@ def generate_recipes(ingredients: List[str]):
 
     # 2. Generate image for each recipe
     for recipe in recipes_list:
-        dalle_response_img_url = get_dall_e_response(
+        dalle_response_img_urls = get_dall_e_response(
             f"Make an interesting image that is practical to cook for kids for the recipe: {recipe['title']}",
             size=1024,
+            model="dall-e-2",
+            n_images=4,
         )
-        recipe["image_url"] = dalle_response_img_url
+        recipe["image_url"] = dalle_response_img_urls
         recipe["recipe_uuid"] = str(uuid.uuid4())
 
     # Write recipe_list to data/recipe_output.json
