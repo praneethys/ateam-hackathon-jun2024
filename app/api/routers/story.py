@@ -1,12 +1,12 @@
 import json
 import os
 from typing import List
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 
 from app.schema.index import IngredientList, Recipe, RecipeListLLMResponse
 from app.service.recipes import generate_recipes
-from app.service.stories import generate_story
+from app.service.stories import generate_story, respond_to_user
 
 story_router = r = APIRouter(prefix="/api/v1/story", tags=["story"])
 
@@ -77,3 +77,23 @@ def get_story(recipe_id: str):
     with open(os.path.join(data_dir, f"{recipe_id}.json"), "r") as f:
         story = json.load(f)
         return story
+
+
+@r.post(
+    "/user-input",
+    responses={
+        200: {"description": "Text found"},
+        404: {"description": "Text not found"},
+        400: {"description": "Invalid file type"},
+        500: {"description": "Internal server error"},
+    },
+)
+async def get_user_voice_input(audio_file: UploadFile):
+    if not audio_file.content_type.startswith("audio/"):
+        return HTTPException(status_code=400, detail="Invalid file type")
+
+    audio_data_bytes = await audio_file.read()
+
+    response = await respond_to_user(audio_data_bytes)
+
+    return FileResponse(path=response, filename="response.mp3", media_type="audio/mpeg")
