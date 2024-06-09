@@ -118,3 +118,26 @@ async def get_user_voice_input(audio_file: UploadFile):
     response = await respond_to_user(audio_data_bytes)
 
     return FileResponse(path=response, filename="response.mp3", media_type="audio/mpeg")
+
+
+@r.get(
+    "/title/{recipe_id}",
+    responses={
+        200: {"description": "Recipe found"},
+        404: {"description": "Recipe not found"},
+        500: {"description": "Internal server error"},
+    },
+)
+def get_title(recipe_id: str):
+    data_dir = os.path.abspath("./data")
+    with open(os.path.join(data_dir, "recipe_output.json"), "r") as f:
+        recipes_list = json.load(f)
+
+    if recipes_list is None or len(recipes_list) == 0:
+        return HTTPException(status_code=404, detail="Recipes not found")
+
+    for recipe in recipes_list:
+        if recipe["recipe_uuid"] == recipe_id:
+            return {"title": recipe["title"]}
+
+    return HTTPException(status_code=404, detail="Recipe not found")
