@@ -4,7 +4,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 
 from app.schema.index import IngredientList
-from app.service.recipes import generate_recipes
+from app.service.recipes import generate_recipes, get_ingredient_facts
 
 recipe_router = r = APIRouter(prefix="/api/v1/recipes", tags=["recipes"])
 
@@ -36,6 +36,17 @@ def post_recipes(ingredients: IngredientList):
     recipes = generate_recipes(ingredients_list)
 
     return recipes
+
+
+@r.get(
+    "/ingredient-facts",
+    responses={
+        200: {"description": "Nutrition facts generated"},
+        500: {"description": "Internal server error"},
+    },
+)
+def ingredient_facts():
+    return get_ingredient_facts()
 
 
 @r.get(
